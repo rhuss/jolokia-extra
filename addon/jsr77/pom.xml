@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.jolokia.extra</groupId>
+  <artifactId>jolokia-extra-addon-jsr77</artifactId>
+  <packaging>jar</packaging>
+  <version>1.2.2-SNAPSHOT</version>
+
+  <parent>
+    <groupId>org.jolokia.extra</groupId>
+    <artifactId>jolokia-extra-parent</artifactId>
+    <version>1.2.2-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.jolokia</groupId>
+      <artifactId>jolokia-core</artifactId>
+      <version>${jolokia.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>javax.management.j2ee</groupId>
+      <artifactId>management-api</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+    </dependency>
+
+  </dependencies>
+</project>
