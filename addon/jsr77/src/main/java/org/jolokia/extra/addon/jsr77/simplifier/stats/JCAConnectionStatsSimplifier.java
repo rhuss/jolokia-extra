@@ -27,20 +27,17 @@ public class JCAConnectionStatsSimplifier extends StatsSimplifier<JCAConnectionS
     public JCAConnectionStatsSimplifier() {
         super(JCAConnectionStats.class);
         addExtractors(new Object[][]{
-                {"connectionFactory", new ConnectionFactoryExtractor()},
-                {"managedConnectionFactory", new ManagedConnectionFactoryExtractor()},
+                {"connectionFactory", new AttributeExtractor<JCAConnectionStats>() {
+                    public String extract(JCAConnectionStats o) {
+                        return o.getConnectionFactory();
+                    }
+                }},
+                {"managedConnectionFactory", new AttributeExtractor<JCAConnectionStats>() {
+                    public String extract(JCAConnectionStats o) {
+                        return o.getManagedConnectionFactory();
+                    }
+                }},
         });
     }
 
-    private static class ConnectionFactoryExtractor implements AttributeExtractor<JCAConnectionStats> {
-        public String extract(JCAConnectionStats o) {
-            return o.getConnectionFactory();
-        }
-    }
-
-    private static class ManagedConnectionFactoryExtractor implements AttributeExtractor<JCAConnectionStats> {
-        public String extract(JCAConnectionStats o) {
-            return o.getManagedConnectionFactory();
-        }
-    }
 }

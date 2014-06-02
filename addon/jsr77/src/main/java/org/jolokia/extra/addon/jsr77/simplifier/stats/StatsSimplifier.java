@@ -38,17 +38,15 @@ public class StatsSimplifier<T extends Stats> extends SimplifierExtractor<T> {
     @SuppressWarnings("unchecked")
 	protected StatsSimplifier(Class<T> type) {
         super(type);
-        addExtractor("statistics", new StatsAttributeExtractor());
-    }
-
-    private class StatsAttributeExtractor implements AttributeExtractor<T> {
-        public Object extract(Stats value) throws SkipAttributeException {
-            Map<String, Statistic> result = new HashMap<String, Statistic>();
-            for (String name : value.getStatisticNames()) {
-                result.put(name, value.getStatistic(name));
+        addExtractor("statistics", new AttributeExtractor<T>() {
+            public Object extract(Stats value) throws SkipAttributeException {
+                Map<String, Statistic> result = new HashMap<String, Statistic>();
+                for (String name : value.getStatisticNames()) {
+                    result.put(name, value.getStatistic(name));
+                }
+                return result;
             }
-            return result;
-        }
+        });
     }
 
 }

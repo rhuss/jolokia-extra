@@ -30,12 +30,11 @@ public class JMSProducerStatsSimplifier extends StatsSimplifier<JMSProducerStats
 
 	protected JMSProducerStatsSimplifier(Class<JMSProducerStats> type) {
 		super(type);
-		addExtractor("destination", new DestinationExtractor());
+		addExtractor("destination", new AttributeExtractor<JMSProducerStats>() {
+            public String extract(JMSProducerStats o) {
+                return o.getDestination();
+            }
+        });
 	}
 
-    private static class DestinationExtractor implements AttributeExtractor<JMSProducerStats> {
-        public String extract(JMSProducerStats o) {
-            return o.getDestination();
-        }
-    }
 }

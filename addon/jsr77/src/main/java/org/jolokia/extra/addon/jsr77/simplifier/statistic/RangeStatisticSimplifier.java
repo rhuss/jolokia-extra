@@ -28,26 +28,21 @@ public class RangeStatisticSimplifier extends StatisticSimplifier<RangeStatistic
     public RangeStatisticSimplifier() {
         super(RangeStatistic.class);
 
-		addExtractor("current", new CurrentExtractor());
-		addExtractor("highWaterMark", new HighWaterMarkExtractor());
-		addExtractor("lowWaterMark", new LowWaterMarkExtractor());
+		addExtractor("current", new AttributeExtractor<RangeStatistic>() {
+            public Long extract(RangeStatistic o) {
+                return o.getCurrent();
+            }
+        });
+		addExtractor("highWaterMark", new AttributeExtractor<RangeStatistic>() {
+            public Long extract(RangeStatistic o) {
+                return o.getHighWaterMark();
+            }
+        });
+		addExtractor("lowWaterMark", new AttributeExtractor<RangeStatistic>() {
+            public Long extract(RangeStatistic o) {
+                return o.getLowWaterMark();
+            }
+        });
 	}
 
-    private static class CurrentExtractor implements AttributeExtractor<RangeStatistic> {
-        public Long extract(RangeStatistic o) {
-            return o.getCurrent();
-        }
-    }
-
-    private static class HighWaterMarkExtractor implements AttributeExtractor<RangeStatistic> {
-        public Long extract(RangeStatistic o) {
-            return o.getHighWaterMark();
-        }
-    }
-
-    private static class LowWaterMarkExtractor implements AttributeExtractor<RangeStatistic> {
-        public Long extract(RangeStatistic o) {
-            return o.getLowWaterMark();
-        }
-    }
 }

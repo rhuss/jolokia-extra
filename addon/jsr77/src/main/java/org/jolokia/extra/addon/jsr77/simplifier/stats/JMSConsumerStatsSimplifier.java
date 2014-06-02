@@ -27,12 +27,11 @@ public class JMSConsumerStatsSimplifier extends StatsSimplifier<JMSConsumerStats
     @SuppressWarnings("unchecked")
     public JMSConsumerStatsSimplifier() {
         super(JMSConsumerStats.class);
-        addExtractor("origin", new OriginExtractor());
+        addExtractor("origin", new AttributeExtractor<JMSConsumerStats>() {
+            public String extract(JMSConsumerStats o) {
+                return o.getOrigin();
+            }
+        });
 	}
 
-    private static class OriginExtractor implements AttributeExtractor<JMSConsumerStats> {
-        public String extract(JMSConsumerStats o) {
-            return o.getOrigin();
-        }
-    }
 }

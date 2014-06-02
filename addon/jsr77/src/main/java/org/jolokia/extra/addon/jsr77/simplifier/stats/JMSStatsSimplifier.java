@@ -30,12 +30,11 @@ public class JMSStatsSimplifier extends StatsSimplifier<JMSStats> {
 
 	protected JMSStatsSimplifier(Class<JMSStats> type) {
 		super(type);
-		addExtractor("connections",new ConnectionsExtractor());
+		addExtractor("connections", new AttributeExtractor<JMSStats>() {
+            public JMSConnectionStats[] extract(JMSStats o) {
+                return o.getConnections();
+            }
+        });
 	}
 
-    private static class ConnectionsExtractor implements AttributeExtractor<JMSStats> {
-        public JMSConnectionStats[] extract(JMSStats o) {
-            return o.getConnections();
-        }
-    }
 }

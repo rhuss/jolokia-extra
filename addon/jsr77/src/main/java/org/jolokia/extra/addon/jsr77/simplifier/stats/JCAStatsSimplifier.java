@@ -30,19 +30,16 @@ public class JCAStatsSimplifier extends StatsSimplifier<JCAStats> {
 
 	protected JCAStatsSimplifier(Class<JCAStats> type) {
 		super(type);
-		addExtractor("connectionPools", new ConnectionPoolsExtractor());
-		addExtractor("connections", new ConnectionsExtractor());
+		addExtractor("connectionPools", new AttributeExtractor<JCAStats>() {
+            public JCAConnectionPoolStats[] extract(JCAStats o) {
+                return o.getConnectionPools();
+            }
+        });
+		addExtractor("connections", new AttributeExtractor<JCAStats>() {
+            public JCAConnectionStats[] extract(JCAStats o) {
+                return o.getConnections();
+            }
+        });
 	}
 
-    private static class ConnectionPoolsExtractor implements AttributeExtractor<JCAStats> {
-        public JCAConnectionPoolStats[] extract(JCAStats o) {
-            return o.getConnectionPools();
-        }
-    }
-
-    private static class ConnectionsExtractor implements AttributeExtractor<JCAStats> {
-        public JCAConnectionStats[] extract(JCAStats o) {
-            return o.getConnections();
-        }
-    }
 }

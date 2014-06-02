@@ -26,12 +26,11 @@ public class CountStatisticSimplifier extends StatisticSimplifier<CountStatistic
     @SuppressWarnings("unchecked")
     public CountStatisticSimplifier() {
         super(CountStatistic.class);
-        addExtractor("count", new CountExtractor());
+        addExtractor("count", new AttributeExtractor<CountStatistic>() {
+            public Long extract(CountStatistic o) {
+                return o.getCount();
+            }
+        });
 	}
 
-    private static class CountExtractor implements AttributeExtractor<CountStatistic> {
-        public Long extract(CountStatistic o) {
-            return o.getCount();
-        }
-    }
 }

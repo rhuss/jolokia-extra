@@ -30,19 +30,16 @@ public class BoundaryStatisticSimplifier<T extends BoundaryStatistic> extends St
 
 	protected BoundaryStatisticSimplifier(Class<T> type) {
 		super(type);
-		addExtractor("lowerBound", new LowerBoundExtractor<T>());
-		addExtractor("upperBound", new UpperBoundExtractor<T>());
+		addExtractor("lowerBound", new AttributeExtractor<T>() {
+            public Long extract(T o) {
+                return o.getLowerBound();
+            }
+        });
+		addExtractor("upperBound", new AttributeExtractor<T>() {
+            public Long extract(T o) {
+                return o.getUpperBound();
+            }
+        });
 	}
 
-    private class LowerBoundExtractor<T extends BoundaryStatistic> implements AttributeExtractor<T> {
-        public Long extract(T o) {
-            return o.getLowerBound();
-        }
-    }
-
-    private class UpperBoundExtractor<T extends BoundaryStatistic> implements AttributeExtractor<T> {
-        public Long extract(T o) {
-            return o.getUpperBound();
-        }
-    }
 }

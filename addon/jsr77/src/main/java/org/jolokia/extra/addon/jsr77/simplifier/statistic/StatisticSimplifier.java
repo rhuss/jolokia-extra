@@ -34,34 +34,27 @@ public class StatisticSimplifier<T extends Statistic> extends SimplifierExtracto
 	protected StatisticSimplifier(Class<T> type) {
         super(type);
         addExtractors(new Object[][]{
-                {"lastSampleTime", new LastSampleTimeExtractor()},
-                {"name", new NameExtractor()},
-                {"startTime", new StartTimeExtractor()},
-                {"unit", new UnitExtractor()}
+                {"lastSampleTime", new AttributeExtractor<T>() {
+                    public Long extract(T o) {
+                        return o.getLastSampleTime();
+                    }
+                }},
+                {"name", new AttributeExtractor<T>() {
+                    public String extract(T o) {
+                        return o.getName();
+                    }
+                }},
+                {"startTime", new AttributeExtractor<T>() {
+                    public Long extract(T o) {
+                        return o.getStartTime();
+                    }
+                }},
+                {"unit", new AttributeExtractor<T>() {
+                    public String extract(T o) {
+                        return o.getUnit();
+                    }
+                }}
         });
     }
 
-    private class LastSampleTimeExtractor implements AttributeExtractor<T> {
-        public Long extract(T o) {
-            return o.getLastSampleTime();
-        }
-    }
-
-    private class NameExtractor implements AttributeExtractor<T> {
-        public String extract(T o) {
-            return o.getName();
-        }
-    }
-
-    private class StartTimeExtractor implements AttributeExtractor<T> {
-        public Long extract(T o) {
-            return o.getStartTime();
-        }
-    }
-
-    private class UnitExtractor implements AttributeExtractor<T> {
-        public String extract(T o) {
-            return o.getUnit();
-        }
-    }
 }

@@ -31,13 +31,12 @@ public class JMSSessionStatsSimplifier extends StatsSimplifier<JMSSessionStats> 
 	protected JMSSessionStatsSimplifier(Class<JMSSessionStats> type) {
 		super(type);
 		addExtractors(new Object[][]{
-                {"producers", new ProducersExtractor()}
+                {"producers", new AttributeExtractor<JMSSessionStats>() {
+                    public JMSProducerStats[] extract(JMSSessionStats o) {
+                        return o.getProducers();
+                    }
+                }}
         });
 	}
 
-    private static class ProducersExtractor implements AttributeExtractor<JMSSessionStats> {
-        public JMSProducerStats[] extract(JMSSessionStats o) {
-            return o.getProducers();
-        }
-    }
 }

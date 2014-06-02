@@ -27,19 +27,16 @@ public class JMSConnectionStatsSimplifier extends StatsSimplifier<JMSConnectionS
 
     public JMSConnectionStatsSimplifier() {
         super(JMSConnectionStats.class);
-        addExtractor("sessions",new SessionsExtractor());
-		addExtractor("transactional", new TransactionalExtractor());
+        addExtractor("sessions", new AttributeExtractor<JMSConnectionStats>() {
+            public JMSSessionStats[] extract(JMSConnectionStats o) {
+                return o.getSessions();
+            }
+        });
+		addExtractor("transactional", new AttributeExtractor<JMSConnectionStats>() {
+            public Boolean extract(JMSConnectionStats o) {
+                return o.isTransactional();
+            }
+        });
 	}
 
-    private static class SessionsExtractor implements AttributeExtractor<JMSConnectionStats> {
-        public JMSSessionStats[] extract(JMSConnectionStats o) {
-            return o.getSessions();
-        }
-    }
-
-    private static class TransactionalExtractor implements AttributeExtractor<JMSConnectionStats> {
-        public Boolean extract(JMSConnectionStats o) {
-            return o.isTransactional();
-        }
-    }
 }

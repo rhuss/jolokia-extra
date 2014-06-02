@@ -28,26 +28,21 @@ public class BoundedRangeStatisticSimplifier
     public BoundedRangeStatisticSimplifier() {
         super(BoundedRangeStatistic.class);
 
-		addExtractor("current", new CurrentExtractor());
-		addExtractor("highWaterMark", new HighWaterMarkExtractor());
-		addExtractor("lowWaterMark", new LowWaterMarkExtractor());
+		addExtractor("current", new AttributeExtractor<BoundedRangeStatistic>() {
+            public Long extract(BoundedRangeStatistic o) {
+                return o.getCurrent();
+            }
+        });
+		addExtractor("highWaterMark", new AttributeExtractor<BoundedRangeStatistic>() {
+            public Long extract(BoundedRangeStatistic o) {
+                return o.getHighWaterMark();
+            }
+        });
+		addExtractor("lowWaterMark", new AttributeExtractor<BoundedRangeStatistic>() {
+            public Long extract(BoundedRangeStatistic o) {
+                return o.getLowWaterMark();
+            }
+        });
 	}
 
-    private static class CurrentExtractor implements AttributeExtractor<BoundedRangeStatistic> {
-        public Long extract(BoundedRangeStatistic o) {
-            return o.getCurrent();
-        }
-    }
-
-    private static class HighWaterMarkExtractor implements AttributeExtractor<BoundedRangeStatistic> {
-        public Long extract(BoundedRangeStatistic o) {
-            return o.getHighWaterMark();
-        }
-    }
-
-    private static class LowWaterMarkExtractor implements AttributeExtractor<BoundedRangeStatistic> {
-        public Long extract(BoundedRangeStatistic o) {
-            return o.getLowWaterMark();
-        }
-    }
 }

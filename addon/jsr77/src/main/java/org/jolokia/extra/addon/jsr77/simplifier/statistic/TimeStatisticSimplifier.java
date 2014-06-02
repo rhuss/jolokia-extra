@@ -27,34 +27,27 @@ public class TimeStatisticSimplifier extends StatisticSimplifier<TimeStatistic> 
     public TimeStatisticSimplifier() {
         super(TimeStatistic.class);
         addExtractors(new Object[][]{
-                {"count", new CountExtractor()},
-                {"maxTime", new MaxTimeExtractor()},
-                {"minTime", new MinTimeExtractor()},
-                {"totalTime", new TotalTimeExtractor()}
+                {"count", new AttributeExtractor<TimeStatistic>() {
+                    public Long extract(TimeStatistic o) {
+                        return o.getCount();
+                    }
+                }},
+                {"maxTime", new AttributeExtractor<TimeStatistic>() {
+                    public Long extract(TimeStatistic o) {
+                        return o.getMaxTime();
+                    }
+                }},
+                {"minTime", new AttributeExtractor<TimeStatistic>() {
+                    public Long extract(TimeStatistic o) {
+                        return o.getMinTime();
+                    }
+                }},
+                {"totalTime", new AttributeExtractor<TimeStatistic>() {
+                    public Long extract(TimeStatistic o) {
+                        return o.getTotalTime();
+                    }
+                }}
         });
     }
 
-    private static class CountExtractor implements AttributeExtractor<TimeStatistic> {
-        public Long extract(TimeStatistic o) {
-            return o.getCount();
-        }
-    }
-
-    private static class MaxTimeExtractor implements AttributeExtractor<TimeStatistic> {
-        public Long extract(TimeStatistic o) {
-            return o.getMaxTime();
-        }
-    }
-
-    private static class MinTimeExtractor implements AttributeExtractor<TimeStatistic> {
-        public Long extract(TimeStatistic o) {
-            return o.getMinTime();
-        }
-    }
-
-    private static class TotalTimeExtractor implements AttributeExtractor<TimeStatistic> {
-        public Long extract(TimeStatistic o) {
-            return o.getTotalTime();
-        }
-    }
 }

@@ -26,12 +26,11 @@ public class JDBCConnectionStatsSimplifier extends StatsSimplifier<JDBCConnectio
 
     public JDBCConnectionStatsSimplifier() {
 		super(JDBCConnectionStats.class);
-		addExtractor("jdbcDataSource", new JdbcDataSourceExtractor());
+		addExtractor("jdbcDataSource", new AttributeExtractor<JDBCConnectionStats>() {
+            public String extract(JDBCConnectionStats o) {
+                return o.getJdbcDataSource();
+            }
+        });
 	}
 
-    private static class JdbcDataSourceExtractor implements AttributeExtractor<JDBCConnectionStats> {
-        public String extract(JDBCConnectionStats o) {
-            return o.getJdbcDataSource();
-        }
-    }
 }

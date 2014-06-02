@@ -26,19 +26,16 @@ public class JDBCStatsSimplifier extends StatsSimplifier<JDBCStats> {
 
     public JDBCStatsSimplifier() {
 		super(JDBCStats.class);
-		addExtractor("connectionPools", new ConnectionPoolsExtractor());
-		addExtractor("connections", new ConnectionsExtractor());
+		addExtractor("connectionPools", new AttributeExtractor<JDBCStats>() {
+            public JDBCConnectionPoolStats[] extract(JDBCStats o) {
+                return o.getConnectionPools();
+            }
+        });
+		addExtractor("connections", new AttributeExtractor<JDBCStats>() {
+            public JDBCConnectionStats[] extract(JDBCStats o) {
+                return o.getConnections();
+            }
+        });
 	}
 
-	private static class ConnectionPoolsExtractor implements AttributeExtractor<JDBCStats> {
-        public JDBCConnectionPoolStats[] extract(JDBCStats o) {
-            return o.getConnectionPools();
-        }
-    }
-
-    private static class ConnectionsExtractor implements AttributeExtractor<JDBCStats> {
-        public JDBCConnectionStats[] extract(JDBCStats o) {
-            return o.getConnections();
-        }
-    }
 }
