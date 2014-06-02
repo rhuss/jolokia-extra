@@ -19,49 +19,26 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.jolokia</groupId>
-  <artifactId>jolokia-jvm</artifactId>
+  <artifactId>jolokia-extra-agent-jvm</artifactId>
   <version>1.2.2-SNAPSHOT</version>
   <name>jolokia-jvm</name>
   <packaging>jar</packaging>
-  <description>JVM-agent</description>
+  <description>JVM-agent with extra functionality</description>
 
   <parent>
-    <groupId>org.jolokia</groupId>
-    <artifactId>jolokia-agent-parent</artifactId>
+    <groupId>org.jolokia.extra</groupId>
+    <artifactId>jolokia-extra-parent</artifactId>
     <version>1.2.2-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
+    <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <dependencies>
     <dependency>
       <groupId>org.jolokia</groupId>
-      <artifactId>jolokia-core</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>com.googlecode.json-simple</groupId>
-      <artifactId>json-simple</artifactId>
+      <artifactId>jolokia-jvm</artifactId>
+      <version>${jolokia.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.easymock</groupId>
-      <artifactId>easymock</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jolokia</groupId>
-      <artifactId>jolokia-test-util</artifactId>
-      <version>${project.version}</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
@@ -112,71 +89,23 @@
     </plugins>
   </build>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>dependencies</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-    </plugins>
-  </reporting>
-
   <profiles>
     <profile>
-      <id>default-tools-1.8.jar</id>
-      <activation>
-        <jdk>1.8</jdk>
-      </activation>
+      <id>jsr77</id>
       <dependencies>
         <dependency>
-          <groupId>com.sun</groupId>
-          <artifactId>tools</artifactId>
-          <version>1.8</version>
-          <scope>system</scope>
-          <systemPath>${java.home}/../lib/tools.jar</systemPath>
+          <groupId>org.jolokia.extra</groupId>
+          <artifactId>jolokia-extra-addon-jsr77</artifactId>
+          <version>${project.version}</version>
         </dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <id>default-tools-1.7.jar</id>
-      <activation>
-        <jdk>1.7</jdk>
-      </activation>
-      <dependencies>
+
         <dependency>
-          <groupId>com.sun</groupId>
-          <artifactId>tools</artifactId>
-          <version>1.7</version>
-          <scope>system</scope>
-          <systemPath>${java.home}/../lib/tools.jar</systemPath>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <id>default-tools-1.6.jar</id>
-      <activation>
-        <property>
-          <name>java.vendor</name>
-          <value>Sun Microsystems Inc.</value>
-        </property>
-      </activation>
-      <dependencies>
-        <dependency>
-          <groupId>com.sun</groupId>
-          <artifactId>tools</artifactId>
-          <version>1.6</version>
-          <scope>system</scope>
-          <systemPath>${java.home}/../lib/tools.jar</systemPath>
+          <groupId>javax.management.j2ee</groupId>
+          <artifactId>management-api</artifactId>
+          <scope>compile</scope>
         </dependency>
       </dependencies>
     </profile>
   </profiles>
-  
+
 </project>

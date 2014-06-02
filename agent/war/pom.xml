@@ -21,8 +21,8 @@
   <groupId>org.jolokia.extra</groupId>
   <artifactId>jolokia-extra-war</artifactId>
   <version>1.2.2-SNAPSHOT</version>
-
   <packaging>war</packaging>
+
   <description>war agent with extra functionality</description>
 
   <parent>
@@ -59,6 +59,7 @@
   </build>
 
   <profiles>
+
     <profile>
       <id>jsr77</id>
       <dependencies>
@@ -68,6 +69,18 @@
           <version>${project.version}</version>
         </dependency>
       </dependencies>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+              <classifier>jsr77</classifier>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
       <activation>
         <activeByDefault/>
       </activation>
