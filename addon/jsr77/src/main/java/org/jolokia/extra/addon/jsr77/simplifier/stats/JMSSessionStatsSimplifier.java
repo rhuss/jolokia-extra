@@ -31,51 +31,9 @@ public class JMSSessionStatsSimplifier extends StatsSimplifier<JMSSessionStats> 
 	protected JMSSessionStatsSimplifier(Class<JMSSessionStats> type) {
 		super(type);
 		addExtractors(new Object[][]{
-                {"consumers", new ConsumersExtractor()},
-                {"durableSubscriptionCount", new DurableSubscriptionCountExtractor()},
-                {"expiredMessageCount", new ExpiredMessageCountExtractor()},
-                {"messageCount", new MessageCountExtractor()},
-                {"messageWaitTime", new MessageWaitTimeExtractor()},
-                {"pendingMessageCount", new PendingMessageCountExtractor()},
                 {"producers", new ProducersExtractor()}
         });
 	}
-
-    private static class ConsumersExtractor implements AttributeExtractor<JMSSessionStats> {
-        public JMSConsumerStats[] extract(JMSSessionStats o) {
-            return o.getConsumers();
-        }
-    }
-
-    private static class DurableSubscriptionCountExtractor implements AttributeExtractor<JMSSessionStats> {
-        public CountStatistic extract(JMSSessionStats o) {
-            return o.getDurableSubscriptionCount();
-        }
-    }
-
-    private static class ExpiredMessageCountExtractor implements AttributeExtractor<JMSSessionStats> {
-        public CountStatistic extract(JMSSessionStats o) {
-            return o.getExpiredMessageCount();
-        }
-    }
-
-    private static class MessageCountExtractor implements AttributeExtractor<JMSSessionStats> {
-        public CountStatistic extract(JMSSessionStats o) {
-            return o.getMessageCount();
-        }
-    }
-
-    private static class MessageWaitTimeExtractor implements AttributeExtractor<JMSSessionStats> {
-        public TimeStatistic extract(JMSSessionStats o) {
-            return o.getMessageWaitTime();
-        }
-    }
-
-    private static class PendingMessageCountExtractor implements AttributeExtractor<JMSSessionStats> {
-        public CountStatistic extract(JMSSessionStats o) {
-            return o.getPendingMessageCount();
-        }
-    }
 
     private static class ProducersExtractor implements AttributeExtractor<JMSSessionStats> {
         public JMSProducerStats[] extract(JMSSessionStats o) {

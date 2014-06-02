@@ -27,7 +27,6 @@ public class JMSConnectionStatsSimplifier extends StatsSimplifier<JMSConnectionS
 
     public JMSConnectionStatsSimplifier() {
         super(JMSConnectionStats.class);
-
         addExtractor("sessions",new SessionsExtractor());
 		addExtractor("transactional", new TransactionalExtractor());
 	}

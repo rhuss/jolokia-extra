@@ -21,37 +21,17 @@
 package org.jolokia.extra.addon.jsr77.simplifier.stats;
 
 import javax.management.j2ee.statistics.JDBCConnectionStats;
-import javax.management.j2ee.statistics.TimeStatistic;
 
-public class JDBCConnectionStatsSimplifier<T extends JDBCConnectionStats> extends StatsSimplifier<T> {
+public class JDBCConnectionStatsSimplifier extends StatsSimplifier<JDBCConnectionStats> {
 
-    @SuppressWarnings("unchecked")
     public JDBCConnectionStatsSimplifier() {
-        this((Class<T>) JDBCConnectionStats.class);
-    }
-
-    protected JDBCConnectionStatsSimplifier(Class<T> type) {
-		super(type);
-		addExtractor("jdbcDataSource", new JdbcDataSourceExtractor<T>());
-		addExtractor("useTime", new UseTimeExtractor<T>());
-		addExtractor("waitTime", new WaitTimeExtractor<T>());
+		super(JDBCConnectionStats.class);
+		addExtractor("jdbcDataSource", new JdbcDataSourceExtractor());
 	}
 
-    private class JdbcDataSourceExtractor<T extends JDBCConnectionStats> implements AttributeExtractor<T> {
-        public String extract(T o) {
+    private static class JdbcDataSourceExtractor implements AttributeExtractor<JDBCConnectionStats> {
+        public String extract(JDBCConnectionStats o) {
             return o.getJdbcDataSource();
-        }
-    }
-
-    private class UseTimeExtractor<T extends JDBCConnectionStats> implements AttributeExtractor<T> {
-        public TimeStatistic extract(T o) {
-            return o.getUseTime();
-        }
-    }
-
-    private class WaitTimeExtractor<T extends JDBCConnectionStats> implements AttributeExtractor<T> {
-        public TimeStatistic extract(T o) {
-            return o.getWaitTime();
         }
     }
 }

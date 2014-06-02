@@ -21,45 +21,26 @@
 package org.jolokia.extra.addon.jsr77.simplifier.stats;
 
 import javax.management.j2ee.statistics.JCAConnectionStats;
-import javax.management.j2ee.statistics.TimeStatistic;
 
-public class JCAConnectionStatsSimplifier<T extends JCAConnectionStats> extends StatsSimplifier<T> {
-    @SuppressWarnings("unchecked")
+public class JCAConnectionStatsSimplifier extends StatsSimplifier<JCAConnectionStats> {
+
     public JCAConnectionStatsSimplifier() {
-        this((Class<T>) JCAConnectionStats.class);
-    }
-
-	protected JCAConnectionStatsSimplifier(Class<T> type) {
-        super(type);
+        super(JCAConnectionStats.class);
         addExtractors(new Object[][]{
-                {"connectionFactory", new ConnectionFactoryExtractor<T>()},
-                {"managedConnectionFactory", new ManagedConnectionFactoryExtractor<T>()},
-                {"useTime", new UseTimeExtractor<T>()},
-                {"waitTime", new WaitTimeExtractor<T>()}
+                {"connectionFactory", new ConnectionFactoryExtractor()},
+                {"managedConnectionFactory", new ManagedConnectionFactoryExtractor()},
         });
     }
 
-    private class ConnectionFactoryExtractor<T extends JCAConnectionStats> implements AttributeExtractor<T> {
-        public String extract(T o) {
+    private static class ConnectionFactoryExtractor implements AttributeExtractor<JCAConnectionStats> {
+        public String extract(JCAConnectionStats o) {
             return o.getConnectionFactory();
         }
     }
 
-    private class ManagedConnectionFactoryExtractor<T extends JCAConnectionStats> implements AttributeExtractor<T> {
-        public String extract(T o) {
+    private static class ManagedConnectionFactoryExtractor implements AttributeExtractor<JCAConnectionStats> {
+        public String extract(JCAConnectionStats o) {
             return o.getManagedConnectionFactory();
-        }
-    }
-
-    private class UseTimeExtractor<T extends JCAConnectionStats> implements AttributeExtractor<T> {
-        public TimeStatistic extract(T o) {
-            return o.getUseTime();
-        }
-    }
-
-    private class WaitTimeExtractor<T extends JCAConnectionStats> implements AttributeExtractor<T> {
-        public TimeStatistic extract(T o) {
-            return o.getWaitTime();
         }
     }
 }

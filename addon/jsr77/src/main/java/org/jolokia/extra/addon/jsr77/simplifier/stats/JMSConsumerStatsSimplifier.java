@@ -22,7 +22,7 @@ package org.jolokia.extra.addon.jsr77.simplifier.stats;
 
 import javax.management.j2ee.statistics.JMSConsumerStats;
 
-public class JMSConsumerStatsSimplifier extends JMSEndpointStatsSimplifier<JMSConsumerStats> {
+public class JMSConsumerStatsSimplifier extends StatsSimplifier<JMSConsumerStats> {
 
     @SuppressWarnings("unchecked")
     public JMSConsumerStatsSimplifier() {
