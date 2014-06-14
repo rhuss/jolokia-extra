@@ -6,12 +6,12 @@
   <groupId>org.jolokia.extra</groupId>
   <artifactId>jolokia-extra-addon-jsr77</artifactId>
   <packaging>jar</packaging>
-  <version>1.2.2-SNAPSHOT</version>
+  <version>1.2.2</version>
 
   <parent>
     <groupId>org.jolokia.extra</groupId>
     <artifactId>jolokia-extra-parent</artifactId>
-    <version>1.2.2-SNAPSHOT</version>
+    <version>1.2.2</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 

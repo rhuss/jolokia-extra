@@ -20,7 +20,7 @@
 
   <groupId>org.jolokia.extra</groupId>
   <artifactId>jolokia-extra-war</artifactId>
-  <version>1.2.2-SNAPSHOT</version>
+  <version>1.2.2</version>
   <packaging>war</packaging>
 
   <description>war agent with extra functionality</description>
@@ -28,7 +28,7 @@
   <parent>
     <groupId>org.jolokia.extra</groupId>
     <artifactId>jolokia-extra-parent</artifactId>
-    <version>1.2.2-SNAPSHOT</version>
+    <version>1.2.2</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
@@ -82,7 +82,7 @@
         </plugins>
       </build>
       <activation>
-        <activeByDefault/>
+        <activeByDefault />
       </activation>
     </profile>
   </profiles>
