@@ -15,7 +15,8 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jolokia.extra</groupId>
   <artifactId>jolokia-extra-parent</artifactId>
@@ -27,81 +28,90 @@
   <packaging>pom</packaging>
 
   <url>http://www.jolokia.org</url>
-  
+
   <modules>
     <module>agent/war</module>
     <module>addon/jsr77</module>
   </modules>
 
+  <properties>
+    <jolokia.version>1.2.2</jolokia.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <currentStableVersion>1.2.2</currentStableVersion>
+    <currentSnapshotVersion>1.2.3-SNAPSHOT</currentSnapshotVersion>
+    <sonar.host.url>http://labs.consol.de/sonar</sonar.host.url>
+    <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+  </properties>
 
-    <!-- Overall version management -->
-    <dependencyManagement>
-      <dependencies>    
-        
-        <dependency>
-          <groupId>javax.management.j2ee</groupId>
-          <artifactId>management-api</artifactId>
-          <version>1.1-rev-1</version>
-          <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-          <groupId>com.googlecode.json-simple</groupId>
-          <artifactId>json-simple</artifactId>
-          <version>1.1.1</version>
-          <exclusions>
-            <!-- That's a bug in json-simple that junit is referenced without scope test -->
-            <exclusion>
-              <groupId>junit</groupId>
-              <artifactId>junit</artifactId>
-            </exclusion>
-          </exclusions>
-        </dependency>
-        
-        <dependency>
-          <groupId>org.osgi</groupId>
-          <artifactId>org.osgi.core</artifactId>
-          <version>4.2.0</version>
-          <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-          <groupId>org.osgi</groupId>
-          <artifactId>org.osgi.compendium</artifactId>
-          <version>4.2.0</version>
-          <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-          <groupId>org.testng</groupId>
-          <artifactId>testng</artifactId>
-          <version>6.1.1</version>
-          <scope>test</scope>
-        </dependency>
-        
-        <dependency>
-          <groupId>org.easymock</groupId>
-          <artifactId>easymock</artifactId>
-          <version>3.0</version>
-          <scope>test</scope>
-        </dependency>
-        
-        <dependency>
-          <groupId>org.jmockit</groupId>
-          <artifactId>jmockit</artifactId>
-          <version>1.8</version>
-          <scope>test</scope>
-        </dependency>
-        
+
+  <!-- Overall version management -->
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>javax.management.j2ee</groupId>
+        <artifactId>management-api</artifactId>
+        <version>1.1-rev-1</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.googlecode.json-simple</groupId>
+        <artifactId>json-simple</artifactId>
+        <version>1.1.1</version>
+        <exclusions>
+          <!-- That's a bug in json-simple that junit is referenced without scope test -->
+          <exclusion>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>org.osgi</groupId>
+        <artifactId>org.osgi.core</artifactId>
+        <version>4.2.0</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.osgi</groupId>
+        <artifactId>org.osgi.compendium</artifactId>
+        <version>4.2.0</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>6.1.1</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.easymock</groupId>
+        <artifactId>easymock</artifactId>
+        <version>3.0</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jmockit</groupId>
+        <artifactId>jmockit</artifactId>
+        <version>1.8</version>
+        <scope>test</scope>
+      </dependency>
+
       <dependency>
         <groupId>com.google.code.findbugs</groupId>
         <artifactId>annotations</artifactId>
         <version>1.3.9</version>
         <scope>provided</scope>
       </dependency>
-      
-      </dependencies>
-    </dependencyManagement>
+
+    </dependencies>
+  </dependencyManagement>
 
 
   <build>
@@ -114,10 +124,10 @@
           <meminitial>128m</meminitial>
           <maxmem>512m</maxmem>
         </configuration>
-      </plugin>      
+      </plugin>
     </plugins>
-    
-    <!-- ===========================================================  -->        
+
+    <!-- ===========================================================  -->
     <!-- plugin versions -->
     <pluginManagement>
       <plugins>
@@ -137,7 +147,7 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.1</version>
         </plugin>
-        
+
         <plugin>
           <artifactId>maven-assembly-plugin</artifactId>
           <version>2.4</version>
@@ -176,7 +186,7 @@
             </archive>
           </configuration>
         </plugin>
-        
+
         <plugin>
           <artifactId>maven-war-plugin</artifactId>
           <version>2.4</version>
@@ -186,7 +196,7 @@
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.7</version>
         </plugin>
-        
+
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.9</version>
@@ -196,12 +206,12 @@
           <artifactId>maven-resources-plugin</artifactId>
           <version>2.5</version>
         </plugin>
-        
+
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>2.3.1</version>
         </plugin>
-                
+
         <plugin>
           <groupId>org.codehaus.sonar</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
@@ -232,12 +242,12 @@
     <tag>HEAD</tag>
     <url>git://github.com/rhuss/jolokia-extra.git</url>
   </scm>
-  
+
   <ciManagement>
     <system>jenkins</system>
     <url>http://labs.consol.de/jenkins/job/jolokia-extra</url>
   </ciManagement>
-    
+
   <licenses>
     <license>
       <name>Apache 2</name>
@@ -258,15 +268,6 @@
       </roles>
     </developer>
   </developers>
-   
-  <properties>
-    <jolokia.version>${project.version}</jolokia.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <currentStableVersion>1.2.1</currentStableVersion>
-    <currentSnapshotVersion>1.2.2-SNAPSHOT</currentSnapshotVersion>
-    <sonar.host.url>http://labs.consol.de/sonar</sonar.host.url>
-    <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
-  </properties>
 
   <repositories>
     <repository>
@@ -298,7 +299,7 @@
       </url>
     </repository>
   </distributionManagement>
-  
+
   <profiles>
     <profile>
       <!-- Distribution to maven central. This is default deployment target -->
@@ -308,6 +309,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
+            <version>2.1.2</version>
             <executions>
               <execution>
                 <id>attach-sources</id>
@@ -317,10 +319,11 @@
               </execution>
             </executions>
           </plugin>
-          
+
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.8</version>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
@@ -330,7 +333,7 @@
               </execution>
             </executions>
           </plugin>
-          
+
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
@@ -352,7 +355,7 @@
         </plugins>
       </build>
     </profile>
-    
+
     <profile>
       <!-- Distribution to labs.consol.de, for artefacts and site -->
       <id>labs</id>
@@ -380,7 +383,7 @@
         </pluginManagement>
       </build>
     </profile>
-      
+
     <!-- Enable JaCoCo Test-->
     <profile>
       <id>jacoco</id>
