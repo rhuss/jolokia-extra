@@ -20,7 +20,7 @@
   <groupId>org.jolokia.extra</groupId>
   <artifactId>jolokia-extra-parent</artifactId>
 
-  <version>1.2.3-SNAPSHOT</version>
+  <version>1.2.2.1</version>
   <name>${project.artifactId}</name>
   <description>jolokia parent pom for jolokia additions</description>
 
@@ -238,7 +238,7 @@
   <scm>
     <connection>scm:git:git://github.com/rhuss/jolokia-extra.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/rhuss/jolokia-extra.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>v1.2.2.1</tag>
     <url>git://github.com/rhuss/jolokia-extra.git</url>
   </scm>
 
