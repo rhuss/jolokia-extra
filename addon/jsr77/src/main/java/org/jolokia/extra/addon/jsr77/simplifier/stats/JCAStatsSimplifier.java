@@ -20,7 +20,11 @@
  */
 package org.jolokia.extra.addon.jsr77.simplifier.stats;
 
+import java.util.Map;
+
 import javax.management.j2ee.statistics.*;
+
+import org.jolokia.extra.addon.jsr77.simplifier.util.ArrayMapConverter;
 
 public class JCAStatsSimplifier extends StatsSimplifier<JCAStats> {
 
@@ -30,16 +34,38 @@ public class JCAStatsSimplifier extends StatsSimplifier<JCAStats> {
 
 	protected JCAStatsSimplifier(Class<JCAStats> type) {
 		super(type);
+        final ArrayMapConverter<JCAConnectionStats> converter = createConverter();
 		addExtractor("connectionPools", new AttributeExtractor<JCAStats>() {
-            public JCAConnectionPoolStats[] extract(JCAStats o) {
-                return o.getConnectionPools();
+            public Map<String,JCAConnectionStats> extract(JCAStats o) {
+                return converter.convert(o.getConnectionPools(), "name");
             }
         });
 		addExtractor("connections", new AttributeExtractor<JCAStats>() {
-            public JCAConnectionStats[] extract(JCAStats o) {
-                return o.getConnections();
+            public Map<String,JCAConnectionStats> extract(JCAStats o) {
+                return converter.convert(o.getConnections(), "name");
             }
         });
 	}
+
+    // =========================
+
+    private ArrayMapConverter<JCAConnectionStats> createConverter() {
+
+        ArrayMapConverter.KeyExtractor<JCAConnectionStats> keyExtractor =
+                new ArrayMapConverter.KeyExtractor<JCAConnectionStats>() {
+                    public String extractKey(JCAConnectionStats value) {
+                        String name = value.getManagedConnectionFactory();
+                        if (name == null) {
+                            value.getConnectionFactory();
+                        }
+                        if (name == null) {
+                            throw new IllegalStateException("No connection factory available as required for JSR-77");
+                        }
+                        return name;
+                    }
+                };
+        
+        return new ArrayMapConverter<JCAConnectionStats>(keyExtractor);
+    }
 
 }
