@@ -30,18 +30,15 @@
 
   <modules>
     <module>agent/war</module>
+    <module>agent/jvm</module>
     <module>addon/jsr77</module>
+    <module>addon/health</module>
   </modules>
 
   <properties>
-    <jolokia.version>1.2.2</jolokia.version>
+    <jolokia.version>1.2.4-SNAPSHOT</jolokia.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <currentStableVersion>1.2.2</currentStableVersion>
-    <currentSnapshotVersion>1.2.3-SNAPSHOT</currentSnapshotVersion>
-    <sonar.host.url>http://labs.consol.de/sonar</sonar.host.url>
-    <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
   </properties>
-
 
   <!-- Overall version management -->
   <dependencyManagement>
@@ -112,6 +109,12 @@
     </dependencies>
   </dependencyManagement>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+    </dependency>
+  </dependencies>
 
   <build>
     <plugins>

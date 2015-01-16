@@ -19,3 +19,20 @@ To build the agents call maven as usual:
     mvn -Pjsr77 clean install
      
 The agents can be found below `agents/`
+
+## Health Checks
+
+Health checks can be used to provide internal, possibly complex checks on MBeans and return a consolidated view of the
+results via extra MBeans registered.
+
+To create the specific agent, use the profile `health`
+
+    mvn -Phealth clean install
+
+Agents can be found in `agents/`
+
+Currently a Proof-of-Concept is available which registers an MBean `jolokia:type=plugin,name=health` with two operations:
+`cpuLoadCheck` (which takes a CPU load threshhold) and `mbeanCountCheck` which simply checks whether there are any MBeans
+registered. Refer to the source in `addon/health` for details.
+
+You can expect a much more sophisticated version with a flexible configuration here soon.

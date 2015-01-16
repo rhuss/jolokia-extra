@@ -1,0 +1,39 @@
+package org.jolokia.extra.addon.health;/*
+ * 
+ * Copyright 2014 Roland Huss
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import java.util.Map;
+
+import javax.management.JMException;
+
+import org.jolokia.backend.plugin.MBeanPlugin;
+import org.jolokia.backend.plugin.MBeanPluginContext;
+
+/**
+ * @author roland
+ * @since 16/01/15
+ */
+public class SampleHealthCheckPlugin implements MBeanPlugin {
+
+    public void init(MBeanPluginContext ctx, Map map) throws JMException {
+        ctx.registerMBean(new SampleHealthCheck(ctx),
+                          "jolokia:type=plugin,name=sample-health-check");
+    }
+
+    public String getId() {
+        return "sample-health-check";
+    }
+}

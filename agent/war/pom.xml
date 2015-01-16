@@ -85,5 +85,28 @@
         <activeByDefault />
       </activation>
     </profile>
+
+    <profile>
+      <id>health</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.jolokia.extra</groupId>
+          <artifactId>jolokia-extra-addon-health</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+      </dependencies>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+              <classifier>health-sample</classifier>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>

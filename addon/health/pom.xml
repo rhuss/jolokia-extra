@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.jolokia.extra</groupId>
-  <artifactId>jolokia-extra-addon-jsr77</artifactId>
+  <artifactId>jolokia-extra-addon-health</artifactId>
   <packaging>jar</packaging>
   <version>1.3.0-SNAPSHOT</version>
 
@@ -20,11 +20,6 @@
       <groupId>org.jolokia</groupId>
       <artifactId>jolokia-core</artifactId>
       <version>${jolokia.version}</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>javax.management.j2ee</groupId>
-      <artifactId>management-api</artifactId>
     </dependency>
 
   </dependencies>
